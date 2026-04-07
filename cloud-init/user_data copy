@@ -1,0 +1,36 @@
+#cloud-config
+package_upgrade: false
+users:
+%{ for user in users ~}
+  - name: ${user.name}
+    groups: ${user.groups}
+    lock-passwd: ${user.lock_passwd}
+    sudo: ${user.sudo}
+    shell: ${user.shell}
+    passwd: ${user.password}
+    ssh_authorized_keys: ${user.ssh_authorized_keys}
+%{~ endfor }
+# users:
+#   - name: user
+#     groups: [adm, sudo]
+#     groups: []
+#     lock-passwd: false
+#     sudo: ALL=(ALL) NOPASSWD:ALL
+#     shell: /bin/bash
+#     passwd: "$6$tGz.h5alKsD5IOP2$yfQ1RTnXjdLnmCQxFG70Jf3d24YAb8Bsb/qZ/iW0aokkahPQ8qlRhgC2ZpVYkcK.CQh579k3IF3f2LTDAMsKH/"
+#     ssh_authorized_keys:
+#       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP1oFq0GYt8j7vg2nNAJNzwBtqrdOUDp8CMQwLRiz4Vz user@ull
+
+# write_files:
+#   - path: /root/vars.env
+#     permissions: '0755'
+#     content: |
+#         export DNS_SERVERS="$${DNS_SERVERS}"
+#         export KUBERNETES_VERSION="$${KUBERNETES_VERSION}"
+#         export KUBERNETES_VERSION_SHORT="$${KUBERNETES_VERSION_SHORT}"
+#         export ETCD_VERSION="$${ETCD_VERSION}"
+
+ssh_pwauth: True ## This line enables ssh password authentication
+# commands from here are run as root
+runcmd:
+  - echo "Ready"

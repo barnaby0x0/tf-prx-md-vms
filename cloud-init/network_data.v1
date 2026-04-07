@@ -1,0 +1,15 @@
+network:
+  version: 1
+  config:
+  - type: physical
+    name: enp0s18
+    subnets:
+      - type: dhcp
+  - type: physical
+    name: enp0s19
+    subnets:
+			- type: static
+			  address: 10.10.10.2/32
+			  gateway: 10.10.10.1
+ 				dns_nameservers:
+					- 1.1.1.1	

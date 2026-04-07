@@ -1,0 +1,21 @@
+#cloud-config
+network:
+  version: 2
+  ethernets:
+%{ for nic_name, nic_config in nics ~}
+    ${nic_name}:
+%{ if lookup(nic_config, "dhcp", "") ~}
+      dhcp4: yes
+%{ else ~}
+      addresses: ["${nic_config.addresses}"]
+      gateway4: ${nic_config.gateway4}
+%{ endif ~}      
+      nameservers:
+        addresses: ${dns_servers}
+%{ for route in nic_config.routes ~}
+      routes:
+        - to: ${route.to}
+          via: ${route.via}
+          metric: ${route.metric}
+%{ endfor ~}
+%{ endfor ~}        
