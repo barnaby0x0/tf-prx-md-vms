@@ -1,12 +1,3 @@
-# Proxmox connection object
-# variable "proxmox_connection" {
-#   description = "Proxmox connection info (url, token)"
-#   type = object({
-#     proxmox_url = string
-#     api_token   = string
-#   })
-# }
-
 variable "proxmox_url" {
   type = string
 }
@@ -20,12 +11,6 @@ variable "target_node" {
   type        = string
   default     = "pve"
 }
-
-# variable "vm_configs_dir" {
-#   description = "Vm Configuration directory"
-#   type        = string
-#   default     = "vm_configs"
-# }
 
 variable "http_server_url" {
   description = "The http server ip"
