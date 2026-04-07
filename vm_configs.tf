@@ -29,7 +29,8 @@ locals {
 }
 
 module "config" {
-  source     = "../definitions"
+  #source     = "../definitions"
+  source = "git::https://github.com/barnaby0x0/tf-prx-md-defs.git?ref=main"
   vm_configs = local.vm_configs
 }
 
